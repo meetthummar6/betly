@@ -2,6 +2,8 @@ import { createFileRoute} from "@tanstack/react-router";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useQuery } from "@tanstack/react-query";
 import Api from "@/axios/Api";
+import { matchSchema } from "@/types";
+import BetCard from "@/components/BetCard";
 
 export const Route = createFileRoute('/_Layout/')({
     component: RouteComponent,
@@ -38,8 +40,8 @@ function RouteComponent() {
         return <div>Error: {error.message}</div>;
     }
 
-    console.log(matches);
-    const matchesToDisplay = matches.slice(0, 2);
+    const matchesToDisplay = matches.filter((match: matchSchema) => !match.isLive).slice(0, 2);
+
 
     return (
         <div className="bg-[#1c1c1c] text-white">
@@ -53,15 +55,18 @@ function RouteComponent() {
                     ))}
                 </TabsList>
                 <TabsContent value="Bets">
-                    {matches.map((match: any) => ( <div>{match.name}</div>
+                    {matchesToDisplay.map((match: matchSchema) => ( <BetCard key={match.id} name={match.name.split(',')[0]} time={match.time} venue={match.venue} team1={match.teams.team1} team2={match.teams.team2} team1Odds={match.teams.team1Odds || 1.8} team2Odds={match.teams.team2Odds || 1.8}/>
                     ))}
                 </TabsContent>
                 <TabsContent value="Live">
                     {
-                        matches[0]?.isLive ? <div>Live</div> : <div>Not Live</div>
+                        matches[0]?.isLive ? <div key={matches[0]?.id}>Live</div> : <div>Not Live</div>
                     }
                 </TabsContent>
-                <TabsContent value="Schedule">Schedule</TabsContent>
+                <TabsContent value="Schedule">
+                    {matches.map((match: matchSchema) => ( <div key={match.id}>{match.name}</div>
+                    ))}
+                </TabsContent>
             </Tabs>
         </div>
     )
