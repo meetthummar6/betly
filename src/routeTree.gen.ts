@@ -15,7 +15,9 @@ import { Route as LayoutRouteImport } from './routes/_Layout/route'
 import { Route as LayoutIndexImport } from './routes/_Layout/index'
 import { Route as AuthLayoutSignupImport } from './routes/_authLayout/Signup'
 import { Route as AuthLayoutLoginImport } from './routes/_authLayout/Login'
+import { Route as LayoutEditProfileImport } from './routes/_Layout/EditProfile'
 import { Route as LayoutBetSlipImport } from './routes/_Layout/BetSlip'
+import { Route as LayoutBetHistoryImport } from './routes/_Layout/BetHistory'
 
 // Create/Update Routes
 
@@ -42,9 +44,21 @@ const AuthLayoutLoginRoute = AuthLayoutLoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LayoutEditProfileRoute = LayoutEditProfileImport.update({
+  id: '/EditProfile',
+  path: '/EditProfile',
+  getParentRoute: () => LayoutRouteRoute,
+} as any)
+
 const LayoutBetSlipRoute = LayoutBetSlipImport.update({
   id: '/BetSlip',
   path: '/BetSlip',
+  getParentRoute: () => LayoutRouteRoute,
+} as any)
+
+const LayoutBetHistoryRoute = LayoutBetHistoryImport.update({
+  id: '/BetHistory',
+  path: '/BetHistory',
   getParentRoute: () => LayoutRouteRoute,
 } as any)
 
@@ -59,11 +73,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRoute
     }
+    '/_Layout/BetHistory': {
+      id: '/_Layout/BetHistory'
+      path: '/BetHistory'
+      fullPath: '/BetHistory'
+      preLoaderRoute: typeof LayoutBetHistoryImport
+      parentRoute: typeof LayoutRouteImport
+    }
     '/_Layout/BetSlip': {
       id: '/_Layout/BetSlip'
       path: '/BetSlip'
       fullPath: '/BetSlip'
       preLoaderRoute: typeof LayoutBetSlipImport
+      parentRoute: typeof LayoutRouteImport
+    }
+    '/_Layout/EditProfile': {
+      id: '/_Layout/EditProfile'
+      path: '/EditProfile'
+      fullPath: '/EditProfile'
+      preLoaderRoute: typeof LayoutEditProfileImport
       parentRoute: typeof LayoutRouteImport
     }
     '/_authLayout/Login': {
@@ -93,12 +121,16 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteRouteChildren {
+  LayoutBetHistoryRoute: typeof LayoutBetHistoryRoute
   LayoutBetSlipRoute: typeof LayoutBetSlipRoute
+  LayoutEditProfileRoute: typeof LayoutEditProfileRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
+  LayoutBetHistoryRoute: LayoutBetHistoryRoute,
   LayoutBetSlipRoute: LayoutBetSlipRoute,
+  LayoutEditProfileRoute: LayoutEditProfileRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
@@ -108,14 +140,18 @@ const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteRouteWithChildren
+  '/BetHistory': typeof LayoutBetHistoryRoute
   '/BetSlip': typeof LayoutBetSlipRoute
+  '/EditProfile': typeof LayoutEditProfileRoute
   '/Login': typeof AuthLayoutLoginRoute
   '/Signup': typeof AuthLayoutSignupRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/BetHistory': typeof LayoutBetHistoryRoute
   '/BetSlip': typeof LayoutBetSlipRoute
+  '/EditProfile': typeof LayoutEditProfileRoute
   '/Login': typeof AuthLayoutLoginRoute
   '/Signup': typeof AuthLayoutSignupRoute
   '/': typeof LayoutIndexRoute
@@ -124,7 +160,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_Layout': typeof LayoutRouteRouteWithChildren
+  '/_Layout/BetHistory': typeof LayoutBetHistoryRoute
   '/_Layout/BetSlip': typeof LayoutBetSlipRoute
+  '/_Layout/EditProfile': typeof LayoutEditProfileRoute
   '/_authLayout/Login': typeof AuthLayoutLoginRoute
   '/_authLayout/Signup': typeof AuthLayoutSignupRoute
   '/_Layout/': typeof LayoutIndexRoute
@@ -132,13 +170,22 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/BetSlip' | '/Login' | '/Signup' | '/'
+  fullPaths:
+    | ''
+    | '/BetHistory'
+    | '/BetSlip'
+    | '/EditProfile'
+    | '/Login'
+    | '/Signup'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/BetSlip' | '/Login' | '/Signup' | '/'
+  to: '/BetHistory' | '/BetSlip' | '/EditProfile' | '/Login' | '/Signup' | '/'
   id:
     | '__root__'
     | '/_Layout'
+    | '/_Layout/BetHistory'
     | '/_Layout/BetSlip'
+    | '/_Layout/EditProfile'
     | '/_authLayout/Login'
     | '/_authLayout/Signup'
     | '/_Layout/'
@@ -175,12 +222,22 @@ export const routeTree = rootRoute
     "/_Layout": {
       "filePath": "_Layout/route.tsx",
       "children": [
+        "/_Layout/BetHistory",
         "/_Layout/BetSlip",
+        "/_Layout/EditProfile",
         "/_Layout/"
       ]
     },
+    "/_Layout/BetHistory": {
+      "filePath": "_Layout/BetHistory.tsx",
+      "parent": "/_Layout"
+    },
     "/_Layout/BetSlip": {
       "filePath": "_Layout/BetSlip.tsx",
+      "parent": "/_Layout"
+    },
+    "/_Layout/EditProfile": {
+      "filePath": "_Layout/EditProfile.tsx",
       "parent": "/_Layout"
     },
     "/_authLayout/Login": {

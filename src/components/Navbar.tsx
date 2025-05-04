@@ -8,12 +8,13 @@ import {
 } from "./ui/sheet"
 import { Button } from "./ui/button"
 import { useNavigate } from "@tanstack/react-router"
+import Api from "@/axios/Api"
 
 const Navbar = ({user,logout}: {user:userSchema,logout:()=>void}) => {
   const navigate=useNavigate();
   return (
     <header className="bg-[#2a2a2a] px-4 py-4 flex items-center justify-between shadow-md max-w-screen sticky top-0 z-50">
-      <div className="text-xl font-bold text-cyan-200 font-Headers">
+      <div className="text-xl font-bold text-cyan-200 font-Headers cursor-pointer" onClick={()=>navigate({to:'/'})}>
           Bet.ly
       </div>
       <div className="flex items-center space-x-4 xl:space-x-10 px-2 xl:mx-4">
@@ -32,9 +33,9 @@ const Navbar = ({user,logout}: {user:userSchema,logout:()=>void}) => {
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 mt-4 px-2">
-              <Button className="w-full bg-blue-400 text-black hover:bg-blue-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={()=>{navigate({to:'/edit-profile'})}}> Edit Profile</Button>
-              <Button className="w-full bg-cyan-400 text-black hover:bg-cyan-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={()=>{navigate({to:'/history'})}}>History</Button>
-              <Button className="w-full bg-emerald-400 text-black hover:bg-emerald-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={()=>{navigate({to:'/profile'})}}>Req Money</Button>
+              <Button className="w-full bg-blue-400 text-black hover:bg-blue-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={()=>{navigate({to:'/EditProfile'})}}> Edit Profile</Button>
+              <Button className="w-full bg-cyan-400 text-black hover:bg-cyan-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={()=>{navigate({to:'/BetHistory'})}}>History</Button>
+              <Button className="w-full bg-emerald-400 text-black hover:bg-emerald-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={async()=>{;await Api.post('/users/req-money');window.location.reload();}} disabled={Number(user.balance)>100}>Req Money</Button>
               <Button className="w-full bg-rose-400 text-black hover:bg-rose-300 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]" onClick={logout}>
                 Logout
               </Button>
