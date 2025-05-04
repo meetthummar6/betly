@@ -2,17 +2,18 @@ import React, { createContext, useContext, useEffect, useState,useCallback,useMe
 import Api from '../axios/Api';
 
 interface User{
-    username:String,
-    email:String,
-    balance:Number
+    username:string,
+    email:string,
+    balance:number,
+    _id:string
 }
 
 interface AuthContextType{
     user: User | null;
     loading: boolean;
     login:(Credentials: {
-        username: String;
-        password: String
+        username: string;
+        password: string
     })=> Promise<void>;
     logout:()=> Promise<void>
 }
@@ -40,11 +41,11 @@ export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
         },[]);
 
     const login = useCallback(async (Credentials:{
-        username:String,
-        password: String
+        username:string,
+        password: string
     })=>{
         const res=await Api.post('users/login',Credentials);
-        setUser(res.data);
+        setUser(res.data.data.user);
     },[]);
 
     const logout =useCallback(async ()=>{

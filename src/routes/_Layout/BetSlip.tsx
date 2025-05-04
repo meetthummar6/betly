@@ -1,8 +1,9 @@
 import { createFileRoute,useSearch} from '@tanstack/react-router'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useAuth } from '@/auth/AuthContext'
 import Api from '@/axios/Api'
 
 export const Route = createFileRoute('/_Layout/BetSlip')({
@@ -11,7 +12,8 @@ export const Route = createFileRoute('/_Layout/BetSlip')({
 })
 
 function RouteComponent() {
-    const {choice,match,teamOdds}=useSearch({from:'/_Layout/BetSlip'});
+    const {user}=useAuth();
+    const {id,choice,match,teamOdds}=useSearch({from:'/_Layout/BetSlip'});
     const [stake,setStake]=useState(0);
     const potentialReturn=(stake*teamOdds).toFixed(2);
   return <div className='min-h-screen bg-[#0a0a0a] text-white px-4 py-6'>
@@ -36,7 +38,16 @@ function RouteComponent() {
                     Potential Return: {potentialReturn}
                 </div>
         </div>
-        <Button className='w-full bg-cyan-200 text-black hover:bg-cyan-100 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]'>Place Bet</Button>
+        <Button className='w-full bg-cyan-200 text-black hover:bg-cyan-100 transition-all shadow-[0_0_10px_#00ffff44] hover:shadow-[0_0_20px_#00ffff66]' onClick={async() => {
+            if (!choice || !match || !teamOdds || !stake || !user) return toast.error('Please fill all fields');
+            if(stake<=0) return toast.error('Invalid Stake');
+            if(user?.balance && stake>user?.balance) return toast.error('Insufficient Balance');
+            await Api.post('/bets', {matchId:id,bet_team:choice,bet_odds:teamOdds,amount:stake,userId:user?._id}).then((res) => {
+                toast.success(res.data.message);
+                setStake(0);
+                window.location.href='/';
+            }).catch((err) => toast.error(err.response.data.message));
+        }}>Place Bet</Button>
     </div>
   </div>
 }

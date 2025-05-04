@@ -18,7 +18,7 @@ interface matchSchema {
   },
   time: string,
   venue: string,
-  id: string
+  _id: string
 }
 
 export { userSchema, matchSchema }

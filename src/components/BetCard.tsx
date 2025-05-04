@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
-const BetCard = ({name,time,venue,team1,team2,team1Odds,team2Odds}: {name: string,time: string,venue: string,team1: string,team2: string,team1Odds: number,team2Odds: number}) => {
+const BetCard = ({id,name,time,venue,team1,team2,team1Odds,team2Odds}: {id: string,name: string,time: string,venue: string,team1: string,team2: string,team1Odds: number,team2Odds: number}) => {
     const date = new Date(time+'Z').toLocaleString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -23,7 +23,7 @@ const BetCard = ({name,time,venue,team1,team2,team1Odds,team2Odds}: {name: strin
             {venue}
         </p>
         <div className='grid grid-cols-2 gap-4'>
-            <Link to={`/betslip`} search={{choice: team1}} className='group bg-black hover:bg-cyan-600 rounded-xl p-3 shadow-[0_0_10px_#00ffff33] hover:shadow-[0_0_20px_#00ffff66] ring-1 ring-cyan-200/20 tramsform hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer'>
+            <Link to={`/betslip`} search={{id:id,choice: team1,match: name,teamOdds: team1Odds}} className='group bg-black hover:bg-cyan-600 rounded-xl p-3 shadow-[0_0_10px_#00ffff33] hover:shadow-[0_0_20px_#00ffff66] ring-1 ring-cyan-200/20 tramsform hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer'>
                 <div className='text-white font-medium text-center'>
                     {team1}
                 </div>
@@ -31,7 +31,7 @@ const BetCard = ({name,time,venue,team1,team2,team1Odds,team2Odds}: {name: strin
                     {team1Odds}
                 </div>
             </Link>
-            <Link to={`/betslip`} search={{choice: team2,match: name,teamOdds: team2Odds}} className='bg-black hover:bg-cyan-600 rounded-xl p-3 shadow-[0_0_10px_#00ffff33] hover:shadow-[0_0_20px_#00ffff66] ring-1 ring-cyan-200/20 transform hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer'>
+            <Link to={`/betslip`} search={{ id:id,choice: team2,match: name,teamOdds: team2Odds}} className='bg-black hover:bg-cyan-600 rounded-xl p-3 shadow-[0_0_10px_#00ffff33] hover:shadow-[0_0_20px_#00ffff66] ring-1 ring-cyan-200/20 transform hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer'>
                 <div className='text-white font-medium text-center'>
                     {team2} 
                 </div>

@@ -48,8 +48,10 @@ function LoginComponent(){
         const user = { username: data.username, password: data.password };
         login(user).then(
             () => {
-                toast.success("User logged in successfully");
-                navigate({to:'/'});
+                setTimeout(()=>{
+                  toast.success("User logged in successfully");
+                  navigate({to:'/'});
+                },1000);
             }
         ).catch((err) => toast.error(err.response.data.message));
       };

@@ -56,7 +56,7 @@ function RouteComponent() {
                     ))}
                 </TabsList>
                 <TabsContent value="Bets">
-                    {matchesToDisplay.map((match: matchSchema) => ( <BetCard key={match.id} name={match.name.split(',')[0]} time={match.time} venue={match.venue} team1={match.teams.team1} team2={match.teams.team2} team1Odds={match.teams.team1Odds || 1.8} team2Odds={match.teams.team2Odds || 1.8}/>
+                    {matchesToDisplay.map((match: matchSchema) => ( <BetCard key={match._id} id={match._id} name={match.name.split(',')[0]} time={match.time} venue={match.venue} team1={match.teams.team1} team2={match.teams.team2} team1Odds={match.teams.team1Odds || 1.8} team2Odds={match.teams.team2Odds || 1.8}/>
                     ))}
                 </TabsContent>
                 <TabsContent value="Live">
