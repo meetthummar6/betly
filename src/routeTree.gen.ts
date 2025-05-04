@@ -15,6 +15,7 @@ import { Route as LayoutRouteImport } from './routes/_Layout/route'
 import { Route as LayoutIndexImport } from './routes/_Layout/index'
 import { Route as AuthLayoutSignupImport } from './routes/_authLayout/Signup'
 import { Route as AuthLayoutLoginImport } from './routes/_authLayout/Login'
+import { Route as LayoutBetSlipImport } from './routes/_Layout/BetSlip'
 
 // Create/Update Routes
 
@@ -41,6 +42,12 @@ const AuthLayoutLoginRoute = AuthLayoutLoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LayoutBetSlipRoute = LayoutBetSlipImport.update({
+  id: '/BetSlip',
+  path: '/BetSlip',
+  getParentRoute: () => LayoutRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -51,6 +58,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRoute
+    }
+    '/_Layout/BetSlip': {
+      id: '/_Layout/BetSlip'
+      path: '/BetSlip'
+      fullPath: '/BetSlip'
+      preLoaderRoute: typeof LayoutBetSlipImport
+      parentRoute: typeof LayoutRouteImport
     }
     '/_authLayout/Login': {
       id: '/_authLayout/Login'
@@ -79,10 +93,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface LayoutRouteRouteChildren {
+  LayoutBetSlipRoute: typeof LayoutBetSlipRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
+  LayoutBetSlipRoute: LayoutBetSlipRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
@@ -92,12 +108,14 @@ const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteRouteWithChildren
+  '/BetSlip': typeof LayoutBetSlipRoute
   '/Login': typeof AuthLayoutLoginRoute
   '/Signup': typeof AuthLayoutSignupRoute
   '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/BetSlip': typeof LayoutBetSlipRoute
   '/Login': typeof AuthLayoutLoginRoute
   '/Signup': typeof AuthLayoutSignupRoute
   '/': typeof LayoutIndexRoute
@@ -106,6 +124,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_Layout': typeof LayoutRouteRouteWithChildren
+  '/_Layout/BetSlip': typeof LayoutBetSlipRoute
   '/_authLayout/Login': typeof AuthLayoutLoginRoute
   '/_authLayout/Signup': typeof AuthLayoutSignupRoute
   '/_Layout/': typeof LayoutIndexRoute
@@ -113,12 +132,13 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/Login' | '/Signup' | '/'
+  fullPaths: '' | '/BetSlip' | '/Login' | '/Signup' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/Login' | '/Signup' | '/'
+  to: '/BetSlip' | '/Login' | '/Signup' | '/'
   id:
     | '__root__'
     | '/_Layout'
+    | '/_Layout/BetSlip'
     | '/_authLayout/Login'
     | '/_authLayout/Signup'
     | '/_Layout/'
@@ -155,8 +175,13 @@ export const routeTree = rootRoute
     "/_Layout": {
       "filePath": "_Layout/route.tsx",
       "children": [
+        "/_Layout/BetSlip",
         "/_Layout/"
       ]
+    },
+    "/_Layout/BetSlip": {
+      "filePath": "_Layout/BetSlip.tsx",
+      "parent": "/_Layout"
     },
     "/_authLayout/Login": {
       "filePath": "_authLayout/Login.tsx"

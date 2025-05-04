@@ -1,7 +1,7 @@
 interface userSchema {
-    username: string,
-    email: string,
-    balance: number
+    username: string | String,
+    email: string | String,
+    balance: number | Number
   }
 
 interface matchSchema {

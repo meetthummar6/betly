@@ -3,6 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx"
 import { userSchema } from "../types"
 
 const Navbar = ({user,logout}: {user:userSchema,logout:()=>void}) => {
+  if(!user) return null
   return (
     <header className="bg-[#2a2a2a] px-4 py-4 flex items-center justify-between shadow-md max-w-screen sticky top-0 z-50">
       <div className="text-xl font-bold text-cyan-200 font-Headers">
