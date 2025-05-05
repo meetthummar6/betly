@@ -80,7 +80,7 @@ function RouteComponent() {
                     }
                 </TabsContent>
                 <TabsContent value="Schedule">
-                    {matches.map((match: matchSchema) => ( <ScheduleCard key={match.id} team1={match.teams.team1} team2={match.teams.team2} time={match.time} venue={match.venue}/>
+                    {matches.map((match: matchSchema) => ( <ScheduleCard key={match._id} team1={match.teams.team1} team2={match.teams.team2} time={match.time} venue={match.venue}/>
                     ))}
                 </TabsContent>
             </Tabs>

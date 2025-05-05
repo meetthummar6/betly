@@ -12,12 +12,10 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Link } from "@tanstack/react-router";
 import Api from "../../axios/Api";
 import toast from "react-hot-toast";
 import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/auth/AuthContext";
-import { useEffect } from "react";
 
 
 export const Route = createFileRoute('/_Layout/EditProfile')({

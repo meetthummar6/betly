@@ -1,7 +1,7 @@
 interface userSchema {
-    username: string | String,
-    email: string | String,
-    balance: number | Number
+    username: string,
+    email: string,
+    balance: number
   }
 
 interface matchSchema {
@@ -21,4 +21,17 @@ interface matchSchema {
   _id: string
 }
 
-export { userSchema, matchSchema }
+interface betSchema {
+  bet_team: string,
+  matchId: {
+    _id: string,
+    name: string
+  },
+  bet_odds: number,
+  userId: string,
+  _id: string,
+  status: string,
+  amount: number,
+}
+
+export { userSchema, matchSchema, betSchema }
