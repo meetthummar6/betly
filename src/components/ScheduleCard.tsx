@@ -5,12 +5,12 @@ const ScheduleCard = ({team1,team2,time,venue}: {team1: string,team2: string,tim
         "Chennai Super Kings":"#eab308",
         "Royal Challengers Bengaluru":"#b91c1c",
         "Kolkata Knight Riders":"#6d28d9",
-        "Delhi Capitals":"#0f172a",
+        "Delhi Capitals":"#1e40af",
         "Sunrisers Hyderabad":"#f97316",
         "Punjab Kings":"#991b1b",
         "Rajasthan Royals":"#d946ef",
         "Lucknow Super Giants":"#0e7490",
-        "Gujarat Titans":"#1e40af",
+        "Gujarat Titans":"#1b2133",
     }
     const date = new Date(time+'Z').toLocaleString('en-US', {
         year: 'numeric',

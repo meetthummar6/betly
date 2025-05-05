@@ -10,7 +10,7 @@ const BetCard = ({id,name,time,venue,team1,team2,team1Odds,team2Odds}: {id: stri
         timeZone: 'Asia/Kolkata'
     });
   return (
-    <div className='bg-[#1c1c1c] border border-cyan-200/20 rounded-2xl shadow-[0_0_10px_#00ffff44] ring-1 ring-cyan-200/20 p-4 w-[96%] sm:w-full max-w-md mx-2 sm:mx-auto mb-6'>
+    <div className='bg-[#1c1c1c] border border-cyan-200/20 rounded-2xl shadow-[0_0_10px_#00ffff44] ring-1 ring-cyan-200 p-4 w-[96%] sm:w-full max-w-md mx-2 sm:mx-auto mt-6 mb-2'>
         <div className='flex items-center justify-between mb-2'>
             <h2 className='text-cyan-200 font-semibold text-lg'>
                 {name}

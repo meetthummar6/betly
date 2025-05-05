@@ -27,9 +27,9 @@ function RouteComponent() {
 });
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  const filteredBets = betHistory.filter(bet => filter === 'all'? true : filter === "settled" ? bet.status === "won" || bet.status === "lost": bet.status === "Pending")
+  const filteredBets = betHistory.filter(bet => filter === 'all'? true : filter === "settled" ? bet.status === "Won" || bet.status === "Lost": bet.status === "Pending")
   return(
-    <div className='max-w-3xl mx-auto px-4 py-8'>
+    <div className='max-w-3xl min-h-screen mx-auto px-4 py-8'>
       <h2 className='text-2xl font-bold mb-6 text-cyan-200'>
         Bet History
       </h2>
@@ -46,7 +46,7 @@ function RouteComponent() {
       <div className='grid gap-4'>
           {
             filteredBets.map((bet) => {
-              const payout = bet.status==="won" ? bet.amount * bet.bet_odds : bet.status === "lost" ? -bet.amount :bet.bet_odds * bet.amount;
+              const payout = bet.status==="Won" ? bet.amount * bet.bet_odds : bet.status === "Lost" ? -bet.amount :bet.bet_odds * bet.amount;
               return (
                 <div className={`rounded-xl border p-4 transition-all ${HistoryCard(bet.status)}`}>
                   <h3 className='text-lg font-bold text-white mb-1'>
