@@ -16,7 +16,7 @@ function LayoutComponent() {
               navigate({to:'/login'});
           }
       },[loading,user,navigate]);
-      if(loading) return <p>loading...</p>
+      if(loading) return <p className='h-screen flex items-center justify-center text-white'>loading...</p>
       if(!user) return null;
     return( <>
       <Navbar user={user} logout={logout} />

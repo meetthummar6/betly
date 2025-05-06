@@ -65,7 +65,7 @@ function SignupComponent(){
         <div className="min-h-screen flex items-center justify-center">
           <div className="max-w-sm w-full flex flex-col items-center border rounded-lg p-6 shadow-[0_0_12px_rgba(0,255,255,0.5)] mx-4 sm:mx-0">
             <p className="mt-4 text-xl font-semibold tracking-tight text-stone-50">
-              Log in to  <span className="text-cyan-200">Bet.ly</span>
+              Sign up to  <span className="text-cyan-200">Bet.ly</span>
             </p>
     
             <Form {...form}>
